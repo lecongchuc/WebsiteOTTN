@@ -1,10 +1,301 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Hello</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang web ôn thi trắc nghiệm Đại học</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1F3B72;
+            padding: 20px;
+            color: white;
+        }
+        header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+        .hero {
+            background: url('https://via.placeholder.com/1600x500') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3em;
+        }
+        .hero button {
+            padding: 15px 30px;
+            background-color: #FF6F61;
+            color: white;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        .features, .demo-quizzes, .leaderboard, .pricing, .subjects, .courses, .testimonials, .footer {
+            padding: 50px 20px;
+        }
+        .features {
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .features h2 {
+            font-size: 2em;
+        }
+        .features .feature {
+            display: inline-block;
+            width: 30%;
+            margin: 20px;
+        }
+        .features .feature i {
+            font-size: 3em;
+            color: #FF6F61;
+        }
+        .demo-quizzes {
+            background-color: #fff;
+            text-align: center;
+        }
+        .demo-quizzes h2 {
+            font-size: 2em;
+        }
+        .demo-quizzes .quiz {
+            display: inline-block;
+            width: 30%;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .demo-quizzes button {
+            padding: 10px 20px;
+            background-color: #1F3B72;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .leaderboard {
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .leaderboard h2 {
+            font-size: 2em;
+        }
+        .leaderboard table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        .leaderboard table th, .leaderboard table td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+        .leaderboard table th {
+            background-color: #1F3B72;
+            color: white;
+        }
+        .pricing {
+            text-align: center;
+        }
+        .pricing .plan {
+            display: inline-block;
+            width: 30%;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .subjects, .courses {
+            background-color: #fff;
+            text-align: center;
+        }
+        .subjects h2, .courses h2, .testimonials h2 {
+            font-size: 2em;
+        }
+        .subjects .subject, .courses .course {
+            display: inline-block;
+            width: 30%;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .testimonials {
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .testimonials .testimonial {
+            display: inline-block;
+            width: 30%;
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .footer {
+            background-color: #1F3B72;
+            color: white;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h1 th:text="${message}"></h1>
+<!-- Header -->
+<header>
+    <nav>
+        <div><h1>Ôn Thi Đại Học</h1></div>
+        <div>
+            <a href="#">Trang chủ</a>
+            <a href="#">Đề thi</a>
+            <a href="#">Môn học</a>
+            <a href="#">Khóa học</a>
+            <a href="#">Xếp hạng</a>
+            <a href="#">Đăng nhập/Đăng ký</a>
+        </div>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+    <h1>Ôn thi trắc nghiệm thông minh cho các môn học đại học</h1>
+    <button>Bắt đầu ngay</button>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <h2>Các tính năng nổi bật</h2>
+    <div class="feature">
+        <i class="fas fa-file-alt"></i>
+        <h3>Ngân hàng đề thi đa dạng</h3>
+        <p>Đề thi từ nhiều môn học đại học, được cập nhật liên tục.</p>
+    </div>
+    <div class="feature">
+        <i class="fas fa-check-circle"></i>
+        <h3>Chấm điểm và đánh giá tự động</h3>
+        <p>Hệ thống đánh giá chi tiết kết quả từng bài thi.</p>
+    </div>
+    <div class="feature">
+        <i class="fas fa-users"></i>
+        <h3>Học cùng cộng đồng</h3>
+        <p>Thảo luận, học hỏi cùng bạn bè và giảng viên.</p>
+    </div>
+</section>
+
+<!-- Subjects Section -->
+<section class="subjects">
+    <h2>Các môn học đại học</h2>
+    <div class="subject">
+        <h3>Kinh tế vĩ mô</h3>
+        <p>Đề thi và tài liệu ôn tập chuyên sâu môn Kinh tế vĩ mô.</p>
+    </div>
+    <div class="subject">
+        <h3>Cơ sở dữ liệu</h3>
+        <p>Thử thách bản thân với các đề thi cơ sở dữ liệu từ cơ bản đến nâng cao.</p>
+    </div>
+    <div class="subject">
+        <h3>Kỹ thuật phần mềm</h3>
+        <p>Đề thi kiểm tra kiến thức về phát triển phần mềm.</p>
+    </div>
+</section>
+
+<!-- Courses Section -->
+<section class="courses">
+    <h2>Các khóa học hỗ trợ ôn thi</h2>
+    <div class="course">
+        <h3>Khóa học Java cơ bản</h3>
+        <p>Học lập trình Java từ cơ bản đến nâng cao.</p>
+    </div>
+    <div class="course">
+        <h3>Khóa học Kế toán tài chính</h3>
+        <p>Ôn luyện kiến thức kế toán tài chính chuyên sâu.</p>
+    </div>
+    <div class="course">
+        <h3>Khóa học Toán cao cấp</h3>
+        <p>Giúp bạn làm chủ các phương pháp toán học tiên tiến.</p>
+    </div>
+</section>
+
+<!-- Demo Quizzes Section -->
+<section class="demo-quizzes">
+    <h2>Đề thi nổi bật</h2>
+    <div class="quiz">
+        <h3>Kinh tế vĩ mô</h3>
+        <p>50 câu hỏi trắc nghiệm | Thời gian: 60 phút</p>
+        <button>Làm đề ngay</button>
+    </div>
+    <div class="quiz">
+        <h3>Cơ sở dữ liệu</h3>
+        <p>40 câu hỏi trắc nghiệm | Thời gian: 50 phút</p>
+        <button>Làm đề ngay</button>
+    </div>
+    <div class="quiz">
+        <h3>Kỹ thuật phần mềm</h3>
+        <p>30 câu hỏi trắc nghiệm | Thời gian: 45 phút</p>
+        <button>Làm đề ngay</button>
+    </div>
+</section>
+
+<!-- Leaderboard Section -->
+<section class="leaderboard">
+    <h2>Bảng xếp hạng học viên</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Vị trí</th>
+            <th>Họ tên</th>
+            <th>Điểm</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Nguyễn Văn A</td>
+            <td>95</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Trần Thị B</td>
+            <td>92</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Lê Minh C</td>
+            <td>89</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+    <h2>Phản hồi từ học viên</h2>
+    <div class="testimonial">
+        <p>"Trang web đã giúp mình chuẩn bị rất tốt cho kỳ thi môn Kinh tế vĩ mô. Đề thi sát với thực tế và rất hữu ích!"</p>
+        <h4>- Nguyễn Văn D</h4>
+    </div>
+    <div class="testimonial">
+        <p>"Mình rất thích tính năng chấm điểm tự động và xem lại kết quả chi tiết từng câu hỏi, rất tiện lợi!"</p>
+        <h4>- Trần Thị E</h4>
+    </div>
+</section>
+
+<!-- Footer -->
+<section class="footer">
+    <p>&copy; 2024 Ôn Thi Đại Học. All Rights Reserved.</p>
+</section>
 </body>
 </html>
