@@ -38,5 +38,14 @@ public class DapAn {
         MaCauHoi = maCauHoi;
     }
 
+    public boolean equalValue(DapAn dapAn){
+        if(this.MaDapAn != dapAn.MaDapAn){
+            return false;
+        }
+        if(!this.NoiDung.equals(dapAn.NoiDung)){
+            return false;
+        }
+        return true;
+    }
 
 }

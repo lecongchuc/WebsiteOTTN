@@ -3,6 +3,7 @@ package com.hutech.websiteOnThiTracNghiem.entities;
 import jakarta.persistence.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name="CauHoi")
@@ -15,13 +16,13 @@ public class CauHoi {
     private Long MaCauTraLoi;
 
     @OneToMany(mappedBy = "MaDapAn", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<DapAn> DanhSachDapAn;
+    private List<DapAn> DanhSachDapAn;
 
     @OneToMany(mappedBy = "MaCauHoi", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<CauHoiDeThi> DanhSachCauHoiDeThi;
+    private List<CauHoiDeThi> DanhSachCauHoiDeThi;
 
     @OneToMany(mappedBy = "MaCauHoi", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<CauHoiLuyenThi> DanhSachCauHoiLuyenThi;
+    private List<CauHoiLuyenThi> DanhSachCauHoiLuyenThi;
 
     @ManyToOne
     @JoinColumn(name = "MaMucDo")
@@ -51,27 +52,27 @@ public class CauHoi {
         MaCauTraLoi = maCauTraLoi;
     }
 
-    public Collection<DapAn> getDanhSachDapAn() {
+    public List<DapAn> getDanhSachDapAn() {
         return DanhSachDapAn;
     }
 
-    public void setDanhSachDapAn(Collection<DapAn> danhSachDapAn) {
+    public void setDanhSachDapAn(List<DapAn> danhSachDapAn) {
         DanhSachDapAn = danhSachDapAn;
     }
 
-    public Collection<CauHoiDeThi> getDanhSachCauHoiDeThi() {
+    public List<CauHoiDeThi> getDanhSachCauHoiDeThi() {
         return DanhSachCauHoiDeThi;
     }
 
-    public void setDanhSachCauHoiDeThi(Collection<CauHoiDeThi> danhSachCauHoiDeThi) {
+    public void setDanhSachCauHoiDeThi(List<CauHoiDeThi> danhSachCauHoiDeThi) {
         DanhSachCauHoiDeThi = danhSachCauHoiDeThi;
     }
 
-    public Collection<CauHoiLuyenThi> getDanhSachCauHoiLuyenThi() {
+    public List<CauHoiLuyenThi> getDanhSachCauHoiLuyenThi() {
         return DanhSachCauHoiLuyenThi;
     }
 
-    public void setDanhSachCauHoiLuyenThi(Collection<CauHoiLuyenThi> danhSachCauHoiLuyenThi) {
+    public void setDanhSachCauHoiLuyenThi(List<CauHoiLuyenThi> danhSachCauHoiLuyenThi) {
         DanhSachCauHoiLuyenThi = danhSachCauHoiLuyenThi;
     }
 
@@ -81,5 +82,31 @@ public class CauHoi {
 
     public void setMaMucDo(MucDo maMucDo) {
         MaMucDo = maMucDo;
+    }
+
+    public boolean equalValue(CauHoi cauHoi){
+        if(!this.NoiDung.equals(cauHoi.getNoiDung())){
+            return false;
+        }
+        if(!this.MaCauTraLoi.equals(cauHoi.getMaCauTraLoi())){
+            return false;
+        }
+        if(!this.MaMucDo.equals(cauHoi.getMaMucDo())){
+            return false;
+        }
+
+        if(this.DanhSachDapAn.size() == cauHoi.DanhSachDapAn.size()){
+            DapAn[] lsA =(DapAn[]) DanhSachDapAn.toArray();
+            DapAn[] lsB = (DapAn[]) cauHoi.DanhSachDapAn.toArray();
+            for(int i=0; i<DanhSachDapAn.size(); i++){
+                if(!lsA[i].equalValue(lsB[i])){
+                    return false;
+                }
+            }
+        }
+        else{
+            return false;
+        }
+        return true;
     }
 }

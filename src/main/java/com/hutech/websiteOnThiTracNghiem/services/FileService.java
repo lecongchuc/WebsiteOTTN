@@ -14,17 +14,20 @@ import java.time.format.DateTimeFormatter;
 
 @Service
 public class FileService {
-    public void SaveFile(MultipartFile file) throws IOException {
+    public void SaveFile(String fileName, String fileExtension, MultipartFile file) throws IOException {
+        if(fileName == null){
+            throw new NullPointerException("File name is null!");
+        }
         if(file == null){
             throw new NullPointerException("File to save is null!");
         }
-        String extension = PublicFunction.GetFileExtension(file.getOriginalFilename());
-        LocalDateTime time = LocalDateTime.now();
-        String fileName = DateTimeFormatter.ofPattern("yyyy-MM-dd_hh-mm-ss").format(time);
+        if(fileName.isEmpty()){
+            throw new NullPointerException("File name is empty!");
+        }
 //        File fileTarget = new File(PublicFunction.CombinePath(Constant.ROOT_PATH, Constant.STORAGE_DIRECTORY),
 //                PublicFunction.SHA1(file.getOriginalFilename())+extension);
         File fileTarget = new File(PublicFunction.CombinePath(Constant.ROOT_PATH, Constant.STORAGE_DIRECTORY),
-                fileName+extension);
+                fileName+fileExtension);
         if(!PublicFunction.IsFolderExists(fileTarget.getParent())){
             throw new SecurityException("Unsupported file name!");
         }
