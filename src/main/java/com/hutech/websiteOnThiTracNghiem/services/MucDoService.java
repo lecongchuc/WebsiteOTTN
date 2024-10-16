@@ -16,9 +16,11 @@ import java.util.Optional;
 public class MucDoService {
     @Autowired
     private MucDoRepository mucDoRepository;
+
     public Optional<MucDo> getMucDoById(String id) {
         return mucDoRepository.findById(id);
     }
+
     public MucDo addMucDo(@Valid MucDo mucDo) {
         return mucDoRepository.save(mucDo);
     }

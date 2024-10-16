@@ -20,11 +20,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -43,17 +41,18 @@ public class FileController {
     @Autowired
     private DapAnService dapAnService;
     private static final Logger log = Logger.getLogger(FileController.class.getName());
+
     @PostMapping("/upload-file")
-    public boolean UploadFile(@RequestParam("file")MultipartFile file){
-        if(file == null) return false;
-        if (!PublicFunction.IsContainInStrings(PublicFunction.GetFileExtension(file.getOriginalFilename()), Constant.ALLOWED_FILE_TYPES)){
+    public boolean UploadFile(@RequestParam("file") MultipartFile file) {
+        if (file == null) return false;
+        if (!PublicFunction.IsContainInStrings(PublicFunction.GetFileExtension(file.getOriginalFilename()), Constant.ALLOWED_FILE_TYPES)) {
             return false;
         }
         try {
             String excelFilePath = PublicFunction.CombinePath(Constant.ROOT_PATH, Constant.STORAGE_DIRECTORY);
             String fileName = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss").format(LocalDateTime.now());
             String extension = PublicFunction.GetFileExtension(file.getOriginalFilename());
-            excelFilePath = PublicFunction.CombinePath(excelFilePath, fileName+extension);
+            excelFilePath = PublicFunction.CombinePath(excelFilePath, fileName + extension);
 
             fileService.SaveFile(fileName, extension, file);
 
@@ -74,7 +73,7 @@ public class FileController {
                 // Get all cells
                 Iterator<Cell> cellIterator = nextRow.cellIterator();
                 //Read cell
-                while(cellIterator.hasNext()){
+                while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
                     Object cellValue = excelService.getCellValue(cell);
                     if (cellValue == null || cellValue.toString().isEmpty()) {
@@ -96,17 +95,16 @@ public class FileController {
 //                    log.log(Level.SEVERE, String.format("i: %d \n j: %d \n j's value: %s", i, j, listRowValue.get(i).get(j)));
 //                }
 //            }
-            for(int i =0; i<listRowValue.size(); i++){
-                if(listRowValue.get(i).size() <4){
+            for (int i = 0; i < listRowValue.size(); i++) {
+                if (listRowValue.get(i).size() < 4) {
                     continue;
                 }
                 cauHoi = new CauHoi();
 //                final String id= String.valueOf(Math.round(Float.parseFloat(listRowValue.get(i).get(0))));
                 final String id = listRowValue.get(i).get(0);
-                try{
+                try {
                     mucDo = mucDoService.getMucDoById(id).orElseThrow(() -> new IllegalArgumentException("Invalid MucDo Id:" + id));
-                }
-                catch (IllegalArgumentException e){
+                } catch (IllegalArgumentException e) {
 //                    throw  new IllegalArgumentException("Invalid MucDo Id:" + id);
                     mucDo = new MucDo();
                     mucDo.setTenMucDo(id);
@@ -115,14 +113,14 @@ public class FileController {
                 }
                 cauHoi.setMaMucDo(mucDo);
                 cauHoi.setNoiDung(listRowValue.get(i).get(1));
-                cauHoi=cauHoiService.addCauHoi(cauHoi);
+                cauHoi = cauHoiService.addCauHoi(cauHoi);
                 danhSachMaDapAn = new ArrayList<>();
-                for(int j=3; j<listRowValue.get(i).size(); j++){
+                for (int j = 3; j < listRowValue.get(i).size(); j++) {
                     log.log(Level.SEVERE, String.format("i: %d \n j: %d \n j's value: %s", i, j, listRowValue.get(i).get(j)));
                     dapAn = new DapAn();
                     dapAn.setMaCauHoi(cauHoi);
                     dapAn.setNoiDung(listRowValue.get(i).get(j));
-                    dapAn=dapAnService.addDapAn(dapAn);
+                    dapAn = dapAnService.addDapAn(dapAn);
                     danhSachMaDapAn.add(dapAn.getMaDapAn());
                 }
                 int cauTraLoi = Math.round(Float.parseFloat(listRowValue.get(i).get(2)));

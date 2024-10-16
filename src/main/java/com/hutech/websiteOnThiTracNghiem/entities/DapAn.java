@@ -1,7 +1,14 @@
 package com.hutech.websiteOnThiTracNghiem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.Objects;
+
+@Setter
+@Getter
 @Entity
 public class DapAn {
     @Id
@@ -12,37 +19,14 @@ public class DapAn {
 
     @ManyToOne
     @JoinColumn(name = "MaCauHoi")
+    @JsonIgnore
     private CauHoi MaCauHoi;
 
-    public Long getMaDapAn() {
-        return MaDapAn;
-    }
-
-    public void setMaDapAn(Long maDapAn) {
-        MaDapAn = maDapAn;
-    }
-
-    public String getNoiDung() {
-        return NoiDung;
-    }
-
-    public void setNoiDung(String noiDung) {
-        NoiDung = noiDung;
-    }
-
-    public CauHoi getMaCauHoi() {
-        return MaCauHoi;
-    }
-
-    public void setMaCauHoi(CauHoi maCauHoi) {
-        MaCauHoi = maCauHoi;
-    }
-
-    public boolean equalValue(DapAn dapAn){
-        if(this.MaDapAn != dapAn.MaDapAn){
+    public boolean equalValue(DapAn dapAn) {
+        if (!Objects.equals(this.MaDapAn, dapAn.MaDapAn)) {
             return false;
         }
-        if(!this.NoiDung.equals(dapAn.NoiDung)){
+        if (!this.NoiDung.equals(dapAn.NoiDung)) {
             return false;
         }
         return true;

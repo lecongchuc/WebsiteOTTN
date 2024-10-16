@@ -1,40 +1,24 @@
 package com.hutech.websiteOnThiTracNghiem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 public class CauHoiLuyenThi {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long MaCauHoiLuyenThi;
     @ManyToOne
-    @JoinColumn(name= "MaCauHoi")
+    @JoinColumn(name = "MaCauHoi")
+    @JsonIgnore
     private CauHoi MaCauHoi;
     @ManyToOne
     @JoinColumn(name = "MaLuyenThi")
+    @JsonIgnore
     private LuyenThi MaLuyenThi;
 
-    public Long getMaCauHoiLuyenThi() {
-        return MaCauHoiLuyenThi;
-    }
-
-    public void setMaCauHoiLuyenThi(Long maCauHoiLuyenThi) {
-        MaCauHoiLuyenThi = maCauHoiLuyenThi;
-    }
-
-    public CauHoi getMaCauHoi() {
-        return MaCauHoi;
-    }
-
-    public void setMaCauHoi(CauHoi maCauHoi) {
-        MaCauHoi = maCauHoi;
-    }
-
-    public LuyenThi getMaLuyenThi() {
-        return MaLuyenThi;
-    }
-
-    public void setMaLuyenThi(LuyenThi maLuyenThi) {
-        MaLuyenThi = maLuyenThi;
-    }
 }

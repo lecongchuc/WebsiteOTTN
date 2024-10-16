@@ -1,9 +1,17 @@
 package com.hutech.websiteOnThiTracNghiem.entities;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Collection;
+import java.util.List;
 
+@Getter
+@Setter
 @Entity
 public class QuyenHan {
     @Id
@@ -14,39 +22,7 @@ public class QuyenHan {
     @Column(length = 500)
     private String MoTa;
 
-    @OneToMany(mappedBy = "UserName", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<TaiKhoan> DanhSachTaiKhoan;
-    public String getMaQuyenHan() {
-        return MaQuyenHan;
-    }
-
-    public void setMaQuyenHan(String maQuyenHan) {
-        MaQuyenHan = maQuyenHan;
-    }
-
-    public String getTenQuyenHan() {
-        return TenQuyenHan;
-    }
-
-    public void setTenQuyenHan(String tenQuyenHan) {
-        TenQuyenHan = tenQuyenHan;
-    }
-
-    public String getMoTa() {
-        return MoTa;
-    }
-
-    public void setMoTa(String moTa) {
-        MoTa = moTa;
-    }
-
-    public Collection<TaiKhoan> getDanhSachTaiKhoan() {
-        return DanhSachTaiKhoan;
-    }
-
-    public void setDanhSachTaiKhoan(Collection<TaiKhoan> danhSachTaiKhoan) {
-        DanhSachTaiKhoan = danhSachTaiKhoan;
-    }
-
-
+    @OneToMany(mappedBy = "UserName", orphanRemoval = true)
+    @JsonIgnore
+    private List<TaiKhoan> DanhSachTaiKhoan;
 }

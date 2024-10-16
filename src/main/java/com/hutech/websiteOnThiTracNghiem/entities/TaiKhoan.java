@@ -1,9 +1,14 @@
 package com.hutech.websiteOnThiTracNghiem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Collection;
+import java.util.List;
 
+@Getter
+@Setter
 @Entity
 public class TaiKhoan {
     @Id
@@ -14,48 +19,10 @@ public class TaiKhoan {
     private float SoDu;
     @ManyToOne
     @JoinColumn(name = "MaQuyenHan")
+    @JsonIgnore
     private QuyenHan MaQuyenHan;
 
-    @OneToMany(mappedBy = "UserName", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<TaiKhoanDeThi> DanhSachTaiKhoanDeThi;
-
-    public String getUserName() {
-        return UserName;
-    }
-
-    public void setUserName(String userName) {
-        UserName = userName;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
-    }
-
-    public float getSoDu() {
-        return SoDu;
-    }
-
-    public void setSoDu(float soDu) {
-        SoDu = soDu;
-    }
-
-    public QuyenHan getMaQuyenHan() {
-        return MaQuyenHan;
-    }
-
-    public void setMaQuyenHan(QuyenHan maQuyenHan) {
-        MaQuyenHan = maQuyenHan;
-    }
-
-    public Collection<TaiKhoanDeThi> getDanhSachTaiKhoanDeThi() {
-        return DanhSachTaiKhoanDeThi;
-    }
-
-    public void setDanhSachTaiKhoanDeThi(Collection<TaiKhoanDeThi> danhSachTaiKhoanDeThi) {
-        DanhSachTaiKhoanDeThi = danhSachTaiKhoanDeThi;
-    }
+    @OneToMany(mappedBy = "UserName", orphanRemoval = true)
+    @JsonIgnore
+    private List<TaiKhoanDeThi> DanhSachTaiKhoanDeThi;
 }

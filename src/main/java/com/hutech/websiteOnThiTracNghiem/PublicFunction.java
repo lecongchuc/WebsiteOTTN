@@ -15,20 +15,23 @@ public class PublicFunction {
         String jarDir = jarFile.getParentFile().getAbsolutePath();
         return jarDir;
     }
-    public static String CombinePath(String path1, String path2){
+
+    public static String CombinePath(String path1, String path2) {
         File file = new File(path1, path2);
         return file.getAbsolutePath();
     }
+
     public static boolean IsFileExists(String path) {
         File f = new File(path);
         return f.exists() && !f.isDirectory();
     }
+
     public static boolean IsFolderExists(String path) {
         File f = new File(path);
         return f.exists() && f.isDirectory();
     }
 
-    public static String SHA1(String text){
+    public static String SHA1(String text) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
             byte[] hash = digest.digest(text.getBytes(StandardCharsets.UTF_8));
@@ -39,16 +42,18 @@ public class PublicFunction {
             return null;
         }
     }
-    public static String GetFileExtension(String fileName){
-        if(fileName.indexOf('.') ==-1){
+
+    public static String GetFileExtension(String fileName) {
+        if (fileName.indexOf('.') == -1) {
             Logger.getLogger(PublicFunction.class.getName()).log(Level.SEVERE, "Exception during GetFileExtension", "Unsupported file name!");
             return null;
         }
         return fileName.substring(fileName.indexOf('.'));
     }
-    public static boolean IsContainInStrings(String str, String[] lst){
-        for(String i : lst){
-            if(str.equals(i))
+
+    public static boolean IsContainInStrings(String str, String[] lst) {
+        for (String i : lst) {
+            if (str.equals(i))
                 return true;
         }
         return false;

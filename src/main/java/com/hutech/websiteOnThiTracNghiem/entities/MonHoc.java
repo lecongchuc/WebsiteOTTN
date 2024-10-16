@@ -1,10 +1,14 @@
 package com.hutech.websiteOnThiTracNghiem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Nationalized;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Collection;
+import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "MonHoc")
 public class MonHoc {
@@ -13,40 +17,12 @@ public class MonHoc {
     private String MaMonHoc;
     @Column(length = 250)
     private String TenMonHoc;
-    @OneToMany(mappedBy = "MaMonHoc", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<DeThi> DanhSachDeThi;
 
-    @OneToMany(mappedBy = "MaMonHoc", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<LuyenThi> DanhSachLuyenThi;
-    public String getMaMonHoc() {
-        return MaMonHoc;
-    }
+    @OneToMany(mappedBy = "MaMonHoc", orphanRemoval = true)
+    @JsonIgnore
+    private List<DeThi> DanhSachDeThi;
 
-    public Collection<DeThi> getDanhSachDeThi() {
-        return DanhSachDeThi;
-    }
-
-    public void setDanhSachDeThi(Collection<DeThi> danhSachDeThi) {
-        DanhSachDeThi = danhSachDeThi;
-    }
-
-    public void setMaMonHoc(String maMonHoc) {
-        MaMonHoc = maMonHoc;
-    }
-
-    public String getTenMonHoc() {
-        return TenMonHoc;
-    }
-
-    public void setTenMonHoc(String tenMonHoc) {
-        TenMonHoc = tenMonHoc;
-    }
-
-    public Collection<LuyenThi> getDanhSachLuyenThi() {
-        return DanhSachLuyenThi;
-    }
-
-    public void setDanhSachLuyenThi(Collection<LuyenThi> danhSachLuyenThi) {
-        DanhSachLuyenThi = danhSachLuyenThi;
-    }
+    @OneToMany(mappedBy = "MaMonHoc", orphanRemoval = true)
+    @JsonIgnore
+    private List<LuyenThi> DanhSachLuyenThi;
 }

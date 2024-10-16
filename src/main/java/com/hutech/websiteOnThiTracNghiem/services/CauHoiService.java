@@ -2,12 +2,14 @@ package com.hutech.websiteOnThiTracNghiem.services;
 
 import com.hutech.websiteOnThiTracNghiem.entities.CauHoi;
 import com.hutech.websiteOnThiTracNghiem.repositories.CauHoiRepository;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import jakarta.validation.Valid;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -15,9 +17,11 @@ import jakarta.validation.Valid;
 public class CauHoiService {
     @Autowired
     private CauHoiRepository cauHoiRepository;
+
     public CauHoi addCauHoi(@Valid CauHoi cauHoi) {
         return cauHoiRepository.save(cauHoi);
     }
+
     public CauHoi updateCauHoi(@NotNull CauHoi cauHoi) {
         CauHoi existingCauHoi = cauHoiRepository.findById(cauHoi.getMaCauHoi())
                 .orElseThrow(() -> new IllegalStateException("CauHoi with ID " +
@@ -28,4 +32,9 @@ public class CauHoiService {
         existingCauHoi.setDanhSachDapAn(cauHoi.getDanhSachDapAn());
         return cauHoiRepository.save(existingCauHoi);
     }
+
+    public List<CauHoi> getAllCauHoi() {
+        return cauHoiRepository.findAll();
+    }
+
 }

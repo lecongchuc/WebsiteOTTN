@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class DapAnService {
     @Autowired
     private DapAnRepository dapAnRepository;
+
     public DapAn addDapAn(@Valid DapAn dapAn) {
         return dapAnRepository.save(dapAn);
     }

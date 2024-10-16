@@ -1,6 +1,5 @@
 package com.hutech.websiteOnThiTracNghiem;
 
-import java.io.File;
 import java.nio.file.Paths;
 
 public class Constant {

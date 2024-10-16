@@ -1,63 +1,30 @@
 package com.hutech.websiteOnThiTracNghiem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Collection;
+import java.util.List;
 
+@Getter
+@Setter
 @Entity
 public class LuyenThi {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long MaLuyenThi;
-
     private int SoLuongCauHoi;
+
     @ManyToOne
     @JoinColumn(name = "MaMonHoc")
+    @JsonIgnore
     private MonHoc MaMonHoc;
-
     @ManyToOne
     @JoinColumn(name = "MaMucDo")
+    @JsonIgnore
     private MucDo MaMucDo;
-    @OneToMany(mappedBy = "MaLuyenThi", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<CauHoiLuyenThi> DanhSachCauHoiLuyenThi;
-
-    public Long getMaLuyenThi() {
-        return MaLuyenThi;
-    }
-
-    public void setMaLuyenThi(Long maLuyenThi) {
-        MaLuyenThi = maLuyenThi;
-    }
-
-    public int getSoLuongCauHoi() {
-        return SoLuongCauHoi;
-    }
-
-    public void setSoLuongCauHoi(int soLuongCauHoi) {
-        SoLuongCauHoi = soLuongCauHoi;
-    }
-
-    public MonHoc getMaMonHoc() {
-        return MaMonHoc;
-    }
-
-    public void setMaMonHoc(MonHoc maMonHoc) {
-        MaMonHoc = maMonHoc;
-    }
-
-    public MucDo getMaMucDo() {
-        return MaMucDo;
-    }
-
-    public void setMaMucDo(MucDo maMucDo) {
-        MaMucDo = maMucDo;
-    }
-
-    public Collection<CauHoiLuyenThi> getDanhSachCauHoiLuyenThi() {
-        return DanhSachCauHoiLuyenThi;
-    }
-
-    public void setDanhSachCauHoiLuyenThi(Collection<CauHoiLuyenThi> danhSachCauHoiLuyenThi) {
-        DanhSachCauHoiLuyenThi = danhSachCauHoiLuyenThi;
-    }
+    @OneToMany(mappedBy = "MaLuyenThi", orphanRemoval = true)
+    @JsonIgnore
+    private List<CauHoiLuyenThi> DanhSachCauHoiLuyenThi;
 }

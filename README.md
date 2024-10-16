@@ -15,6 +15,6 @@ spring.servlet.multipart.max-file-size=2GB
 spring.servlet.multipart.max-request-size=2GB
 ```
 ---
-<h5>**Tạo file `storage` tại đường dẫn `src/main/java/com/hutech/websiteOnThiTracNghiem/` để chạy chức năng upload.**
+<h5>**Tạo folder `storage` tại đường dẫn `src/main/java/com/hutech/websiteOnThiTracNghiem/` để chạy chức năng upload.**
 ---
 ---

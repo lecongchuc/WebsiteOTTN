@@ -1,12 +1,16 @@
 package com.hutech.websiteOnThiTracNghiem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Nationalized;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Collection;
+import java.util.List;
 
+@Getter
+@Setter
 @Entity
-@Table(name="DeThi")
+@Table(name = "DeThi")
 public class DeThi {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,79 +19,19 @@ public class DeThi {
     private Float Gia;
     @Column(length = 500)
     private String GhiChu;
+
     @ManyToOne
     @JoinColumn(name = "MaMonHoc")
+    @JsonIgnore
     private MonHoc MaMonHoc;
-
-    @OneToMany(mappedBy = "MaDeThi", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<TaiKhoanDeThi> DanhSachTaiKhoanDeThi;
-    @OneToMany(mappedBy = "MaDeThi",cascade = CascadeType.ALL,orphanRemoval = true)
-    private Collection<CauHoiDeThi> DanhSachCauHoiDeThi;
-
+    @OneToMany(mappedBy = "MaDeThi", orphanRemoval = true)
+    @JsonIgnore
+    private List<TaiKhoanDeThi> DanhSachTaiKhoanDeThi;
+    @OneToMany(mappedBy = "MaDeThi", orphanRemoval = true)
+    @JsonIgnore
+    private List<CauHoiDeThi> DanhSachCauHoiDeThi;
     @ManyToOne
     @JoinColumn(name = "MaMucDo")
+    @JsonIgnore
     private MucDo MaMucDo;
-    public int getSoLuongCauHoi() {
-        return SoLuongCauHoi;
-    }
-
-    public void setSoLuongCauHoi(int soLuongCauHoi) {
-        SoLuongCauHoi = soLuongCauHoi;
-    }
-
-    public Float getGia() {
-        return Gia;
-    }
-
-    public void setGia(Float gia) {
-        Gia = gia;
-    }
-
-    public String getGhiChu() {
-        return GhiChu;
-    }
-
-    public void setGhiChu(String ghiChu) {
-        GhiChu = ghiChu;
-    }
-
-    public MonHoc getMaMonHoc() {
-        return MaMonHoc;
-    }
-
-    public void setMaMonHoc(MonHoc maMonHoc) {
-        MaMonHoc = maMonHoc;
-    }
-
-    public Collection<CauHoiDeThi> getDanhSachCauHoiDeThi() {
-        return DanhSachCauHoiDeThi;
-    }
-
-    public void setDanhSachCauHoiDeThi(Collection<CauHoiDeThi> danhSachCauHoiDeThi) {
-        DanhSachCauHoiDeThi = danhSachCauHoiDeThi;
-    }
-
-    public Long getMaDeThi() {
-        return MaDeThi;
-    }
-
-    public void setMaDeThi(Long maDeThi) {
-        MaDeThi = maDeThi;
-    }
-
-    public Collection<TaiKhoanDeThi> getDanhSachTaiKhoanDeThi() {
-        return DanhSachTaiKhoanDeThi;
-    }
-
-    public void setDanhSachTaiKhoanDeThi(Collection<TaiKhoanDeThi> danhSachTaiKhoanDeThi) {
-        DanhSachTaiKhoanDeThi = danhSachTaiKhoanDeThi;
-    }
-
-    public MucDo getMaMucDo() {
-        return MaMucDo;
-    }
-
-    public void setMaMucDo(MucDo maMucDo) {
-        MaMucDo = maMucDo;
-    }
 }

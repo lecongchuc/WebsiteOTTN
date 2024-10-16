@@ -1,10 +1,15 @@
 package com.hutech.websiteOnThiTracNghiem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
+@Getter
+@Setter
 @Entity
 public class TaiKhoanDeThi {
     @Id
@@ -15,60 +20,15 @@ public class TaiKhoanDeThi {
     private Date NgayThi;
     @ManyToOne
     @JoinColumn(name = "UserName")
+    @JsonIgnore
     private TaiKhoan UserName;
 
     @ManyToOne
     @JoinColumn(name = "MaDeThi")
+    @JsonIgnore
     private DeThi MaDeThi;
 
-    @OneToMany(mappedBy = "MaTaiKhoanDeThi", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<ChiTietTaiKhoanDeThi> DanhSachChiTiet;
-
-    public Long getMaTaiKhoanDeThi() {
-        return MaTaiKhoanDeThi;
-    }
-
-    public void setMaTaiKhoanDeThi(Long maTaiKhoanDeThi) {
-        MaTaiKhoanDeThi = maTaiKhoanDeThi;
-    }
-
-    public float getKetQua() {
-        return KetQua;
-    }
-
-    public void setKetQua(float ketQua) {
-        KetQua = ketQua;
-    }
-
-    public Date getNgayThi() {
-        return NgayThi;
-    }
-
-    public void setNgayThi(Date ngayThi) {
-        NgayThi = ngayThi;
-    }
-
-    public TaiKhoan getUserName() {
-        return UserName;
-    }
-
-    public void setUserName(TaiKhoan userName) {
-        UserName = userName;
-    }
-
-    public DeThi getMaDeThi() {
-        return MaDeThi;
-    }
-
-    public void setMaDeThi(DeThi maDeThi) {
-        MaDeThi = maDeThi;
-    }
-
-    public Collection<ChiTietTaiKhoanDeThi> getDanhSachChiTiet() {
-        return DanhSachChiTiet;
-    }
-
-    public void setDanhSachChiTiet(Collection<ChiTietTaiKhoanDeThi> danhSachChiTiet) {
-        DanhSachChiTiet = danhSachChiTiet;
-    }
+    @OneToMany(mappedBy = "MaTaiKhoanDeThi", orphanRemoval = true)
+    @JsonIgnore
+    private List<ChiTietTaiKhoanDeThi> DanhSachChiTiet;
 }
